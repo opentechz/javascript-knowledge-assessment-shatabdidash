@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Link Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #0074e4;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Link Manager</h1>
+
+    <button id="showLinks">Show Links</button>
+    <button id="addLink">Add Link</button>
+    <button id="removeLink">Remove Link</button>
+    <button id="quit">Quit</button>
+
+    <script>
+        const showLinksButton = document.getElementById("showLinks");
+        const addLinkButton = document.getElementById("addLink");
+        const removeLinkButton = document.getElementById("removeLink");
+        const quitButton = document.getElementById("quit");
+
+        let links = JSON.parse(localStorage.getItem("links")) || [];
+
+        showLinksButton.addEventListener("click", () => {
+            showLinks();
+        });
+
+        addLinkButton.addEventListener("click", () => {
+            const linkToAdd = prompt("Enter a link to add:");
+            if (linkToAdd) {
+                links.push(linkToAdd);
+                localStorage.setItem("links", JSON.stringify(links));
+            }
+        });
+
+        removeLinkButton.addEventListener("click", () => {
+            const index = prompt("Enter the index of the link to remove:");
+            if (index >= 0 && index < links.length) {
+                links.splice(index, 1);
+                localStorage.setItem("links", JSON.stringify(links));
+            }
+        });
+
+        quitButton.addEventListener("click", () => {
+            // You can add code to handle quitting the application here.
+        });
+
+        function showLinks() {
+            if (links.length === 0) {
+                alert("No links added.");
+            } else {
+                const linksText = links.join("\n");
+                alert("Links:\n" + linksText);
+            }
+        }
+    </script>
+</body>
+</html>
