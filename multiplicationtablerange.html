@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #0074d9;
+        }
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #0074d9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .table-container {
+            margin: 0 10px;
+        }
+        .line {
+            margin: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .number {
+            background-color: #0074d9;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MULTIPLICATION TABLE</h1>
+        <label>Enter a Range:</label>
+        <input type="text" id="rangeInput" placeholder="e.g., 2-10">
+        <br>
+        <button onclick="showTable()">Show</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function showTable() {
+            let rangeInput = document.getElementById('rangeInput').value;
+            let range = rangeInput.split('-');
+            let start = parseInt(range[0]);
+            let end = parseInt(range[1]);
+            
+            if (isNaN(start) || isNaN(end)) {
+                alert('Please enter a valid range (e.g., 2-10)');
+                return;
+            }
+
+            let result = '';
+            for (let num = start; num <= end; num++) {
+                result += '<div class="table-container">';
+                result += '<h2>Table for ' + num + '</h2>';
+                for (let i = 1; i <= 10; i++) {
+                    result += '<div class="line">';
+                    result += '<span class="number">' + num + '</span> x ' + i + ' = ' + num * i;
+                    result += '</div>';
+                }
+                result += '</div>';
+            }
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
